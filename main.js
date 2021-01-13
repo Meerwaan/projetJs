@@ -40,3 +40,7 @@ if (args[3] === "transform" && args[4] === "./movies.json" && args[5] === "movie
 
     })
 }
+
+console.time("test1")
+
+console.timeEnd("test1")
