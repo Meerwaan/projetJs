@@ -55,3 +55,15 @@ console.time(chalk.blue("Temps d'exécution"))
 console.timeEnd(chalk.blue("Temps d'exécution"))
 
 console.log(chalk.blue("---------------------------"))
+
+// ------------------- //
+//       STORY 4       //
+// ------------------- //
+
+// ------------------- //
+//       STORY 5       //
+// ------------------- //
+
+// ------------------- //
+//       STORY 6       //
+// ------------------- //
