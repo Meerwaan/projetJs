@@ -35,12 +35,23 @@ if (args[3] === "transform" && args[4] === "./movies.json" && args[5] === "movie
         }
 
         fs.writeFile('./movies.out.json', JSON.stringify(dataParse, null, 2), (err) => {
+            console.log(chalk.green("---------------------------------"))
+            console.log(chalk.green("Données transférées avec succès !"))
+            console.log(chalk.green("---------------------------------"))
             if (err) throw err;
         });
 
     })
 }
 
-console.time("test1")
+// ------------------- //
+//       STORY 3       //
+// ------------------- //
 
-console.timeEnd("test1")
+console.log(chalk.blue("---------------------------"))
+
+console.time(chalk.blue("Temps d'exécution"))
+
+console.timeEnd(chalk.blue("Temps d'exécution"))
+
+console.log(chalk.blue("---------------------------"))
