@@ -63,9 +63,9 @@ function sort(tab) {
     var changed;
     do {
         changed = false;
-        for (var i = 0; i < tab.length - 1; i++) {
-            if (tab[i] > tab[i + 1]) {
-                var tmp = tab[i];
+        for (let i = 0; i < tab.length - 1; i++) {
+            if (tab[i].release_date > tab[i + 1].release_date) {
+                let tmp = tab[i];
                 tab[i] = tab[i + 1];
                 tab[i + 1] = tmp;
                 changed = true;
@@ -74,30 +74,35 @@ function sort(tab) {
     } while (changed);
 }
 
-fs.readFile('./movies.json', { encoding: 'utf8' }, function (err, data) {
-    if (err) return console.error(err);
+if (args[3] === "sort_date" && args[4] === "./movies.json" && args[5] === "movies.sort.date.json") {
+    fs.readFile('./movies.json', { encoding: 'utf8' }, function (err, data) {
+        if (err) return console.error(err);
 
-    let dataParse = JSON.parse(data);
+        let dataParse = JSON.parse(data);
 
-    for (i = 0; i < dataParse.length; i++) {
+        for (i = 0; i < dataParse.length; i++) {
 
-        var timeStamp = dataParse[i]['release_date'] // le TimeStamp à convertir
+            var timeStamp = dataParse[i]['release_date'] // le TimeStamp à convertir
 
-        date = new Date(timeStamp * 1000); // pour obtenir le timeStamp en millisecondes
+            date = new Date(timeStamp * 1000); // pour obtenir le timeStamp en millisecondes
 
-        annee = date.getFullYear();
+            annee = date.getFullYear();
 
-        dataParse[i]['title'] = dataParse[i]['title'] + ` (${annee})`;
-    }
+            dataParse[i]['title'] = dataParse[i]['title'] + ` (${annee})`;
 
-    fs.writeFile('./movies.out.json', JSON.stringify(dataParse, null, 2), (err) => {
-        console.log(chalk.green("---------------------------------"))
-        console.log(chalk.green("Données transférées avec succès !"))
-        console.log(chalk.green("---------------------------------"))
-        if (err) throw err;
-    });
+        }
 
-})
+        sort(dataParse)
+
+        fs.writeFile('./movies.sort.date.json', JSON.stringify(dataParse, null, 2), (err) => {
+            console.log(chalk.green("-------------------------------------------"))
+            console.log(chalk.green("Données transférées et triées avec succès !"))
+            console.log(chalk.green("-------------------------------------------"))
+            if (err) throw err;
+        });
+
+    })
+}
 
 // ------------------- //
 //       STORY 5       //
