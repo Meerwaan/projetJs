@@ -64,7 +64,7 @@ function sort(tab) {
     do {
         changed = false;
         for (let i = 0; i < tab.length - 1; i++) {
-            if (tab[i].release_date < tab[i + 1].release_date) {
+            if (tab[i].release_date > tab[i + 1].release_date) {
                 let tmp = tab[i];
                 tab[i] = tab[i + 1];
                 tab[i + 1] = tmp;
@@ -114,6 +114,21 @@ if (args[3] === "sort_date" && args[4] === "./movies.json" && args[5] === "movie
 //       STORY 6       //
 // ------------------- //
 
+function sortFilm(tab) {
+    var changed;
+    do {
+        changed = false;
+        for (let i = 0; i < tab.length - 1; i++) {
+            if (tab[i].release_date < tab[i + 1].release_date) {
+                let tmp = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = tmp;
+                changed = true;
+            }
+        }
+    } while (changed);
+}
+
 if (args[3] === "search_key_word" && args[4] === "./movies.json" && args[5] && args[6]) {
     fs.readFile('./movies.json', { encoding: 'utf8' }, function (err, data) {
         if (err) return console.error(err);
@@ -138,16 +153,16 @@ if (args[3] === "search_key_word" && args[4] === "./movies.json" && args[5] && a
             
             let stringOverviewArray = dataParse[i]['overview']
 
-            let stringOverviewArray = str.split(' ');
+            let stringOverviewArraySplit = stringOverviewArray.split(' ');
 
-            if (genresTable.includes(args[6]) && stringOverviewArray.includes(args[5])) {
+            if (genresTable.includes(args[6]) && stringOverviewArraySplit.includes(args[5])) {
                 array.push(dataParse[i]);
             }
         }
 
         }
 
-        sort(array);
+        sortFilm(array);
 
         if(tab.length === 0) {
             console.log(chalk.red(`[ERROR] Aucun film n'a été trouvé avec les mots clefs indiqués.`));
