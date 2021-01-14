@@ -270,5 +270,5 @@ if (args[3] === "search_key_word" && args[4] === "./movies.json" && args[5] && a
     console.log(chalk.blue("---------------------------"))
 
 } else if (!args[5] || !args[6] && (args[3] === "search_key_word" && args[4] === "./movies.json")) {
-    console.log(chalk.red(`[ERROR] Il manque un ou des argument(s)`));
+    console.log(chalk.red(`[ERROR] Il manque un ou des argument(s)`)); 
 }
