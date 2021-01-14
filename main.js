@@ -25,15 +25,14 @@ if (args[3] === "transform" && args[4] === "./movies.json" && args[5] === "movie
         for (i = 0; i < dataParse.length; i++) {
 
             var timeStamp = dataParse[i]['release_date'] // le TimeStamp à convertir
-        
-            date = new Date(timeStamp*1000); // pour obtenir le timeStamp en millisecondes
-    
+
+            date = new Date(timeStamp * 1000); // pour obtenir le timeStamp en millisecondes
+
             annee = date.getFullYear();
 
             dataParse[i]['title'] = dataParse[i]['title'] + ` (${annee})`;
 
         }
-
         fs.writeFile('./movies.out.json', JSON.stringify(dataParse, null, 2), (err) => {
             console.log(chalk.green("---------------------------------"))
             console.log(chalk.green("Données transférées avec succès !"))
@@ -59,6 +58,46 @@ console.log(chalk.blue("---------------------------"))
 // ------------------- //
 //       STORY 4       //
 // ------------------- //
+
+function sort(tab) {
+    var changed;
+    do {
+        changed = false;
+        for (var i = 0; i < tab.length - 1; i++) {
+            if (tab[i] > tab[i + 1]) {
+                var tmp = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = tmp;
+                changed = true;
+            }
+        }
+    } while (changed);
+}
+
+fs.readFile('./movies.json', { encoding: 'utf8' }, function (err, data) {
+    if (err) return console.error(err);
+
+    let dataParse = JSON.parse(data);
+
+    for (i = 0; i < dataParse.length; i++) {
+
+        var timeStamp = dataParse[i]['release_date'] // le TimeStamp à convertir
+
+        date = new Date(timeStamp * 1000); // pour obtenir le timeStamp en millisecondes
+
+        annee = date.getFullYear();
+
+        dataParse[i]['title'] = dataParse[i]['title'] + ` (${annee})`;
+    }
+
+    fs.writeFile('./movies.out.json', JSON.stringify(dataParse, null, 2), (err) => {
+        console.log(chalk.green("---------------------------------"))
+        console.log(chalk.green("Données transférées avec succès !"))
+        console.log(chalk.green("---------------------------------"))
+        if (err) throw err;
+    });
+
+})
 
 // ------------------- //
 //       STORY 5       //
