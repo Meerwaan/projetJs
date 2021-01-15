@@ -24,6 +24,10 @@ if (args[3] === "transform" && args[4] === "./movies.json" && args[5] === "movie
     //Je prends le temps de départ
     let start = new Date().getTime();
 
+    console.log(chalk.magenta("---------------------------"))
+    console.log(chalk.magenta("Veuillez patienter..."));
+    console.log(chalk.magenta("---------------------------"))
+
     // Je lie le fichier ./movies.json
     fs.readFile(args[4], { encoding: 'utf8' }, function(err, data) {
 
@@ -104,6 +108,10 @@ function sort(tab) {
 if (args[3] === "sort_date" && args[4] === "./movies.json" && args[5] === "movies.sort.date.json") {
 
     let start = new Date().getTime();
+
+    console.log(chalk.magenta("---------------------------"))
+    console.log(chalk.magenta("Veuillez patienter..."));
+    console.log(chalk.magenta("---------------------------"))
 
     fs.readFile('./movies.json', { encoding: 'utf8' }, function(err, data) {
         if (err) return console.error(err);
@@ -187,13 +195,19 @@ if (args[3] === "search_date" && args[4] === "./movies.json" && args[5] && args[
 
             // Si la valeur est true, j'effectue un tri avec la recherche dichotomique
 
-            console.log(searchBinary(args[5], dataParse, 0, dataParse.length - 1))
+            console.log(chalk.red("Nous n'avons malheureusement pas réussi à faire cette fonction..."))
+
+            /* console.log(searchBinary(args[5], dataParse, 0, dataParse.length - 1)) */
 
         } else if (args[6] === "false") {
 
             // Si la valeur est false, je n'utilise pas de fonction de tri
 
             let start = new Date().getTime();
+
+            console.log(chalk.magenta("---------------------------"))
+            console.log(chalk.magenta("Veuillez patienter..."));
+            console.log(chalk.magenta("---------------------------"))
 
             for (i = 0; i < dataParse.length; i++) {
 
@@ -259,6 +273,10 @@ if (args[3] === "search_key_word" && args[4] === "./movies.json" && args[5] && a
 
     let start = new Date().getTime();
 
+    console.log(chalk.magenta("---------------------------"))
+    console.log(chalk.magenta("Veuillez patienter..."));
+    console.log(chalk.magenta("---------------------------"))
+
     fs.readFile('./movies.json', { encoding: 'utf8' }, function(err, data) {
         if (err) return console.error(err);
 
@@ -300,7 +318,7 @@ if (args[3] === "search_key_word" && args[4] === "./movies.json" && args[5] && a
 
         // Si aucun résultat n'est trouvé, je retourne une erreur
         if (array.length === 0) {
-            console.log(chalk.red(`[ERROR] Aucun film n'a été trouvé avec les mots clefs indiqués.`));
+            console.log(chalk.red(`[ERROR] - Aucun film n'a été trouvé avec les mots clefs indiqués.`));
 
             // Si au moins un résultat est trouvé, j'affiche le film le plus récent parmi tout le tableau
         } else {
